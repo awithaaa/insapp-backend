@@ -1,8 +1,9 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/user-create.dto';
 import * as argon from 'argon2';
 import { hash } from 'bcryptjs';
+import { UpdateUserDto } from './dto/updateUser.dto';
 
 @Injectable()
 export class UserService {
@@ -48,5 +49,28 @@ export class UserService {
         id: id,
       },
     });
+  }
+
+  async updateUser(dto: UpdateUserDto, email: string) {
+    const user = await this.prismaService.user.findUnique({
+      where: {
+        email: email,
+      },
+    });
+
+    if (!user) throw new NotFoundException('User not found!');
+
+    if (dto.password) {
+      dto.password = await hash(dto.password, 10);
+    }
+
+    const updateUser = await this.prismaService.user.update({
+      where: { email: email },
+      data: { ...dto },
+    });
+
+    const { password, ...res } = updateUser;
+
+    return res;
   }
 }
