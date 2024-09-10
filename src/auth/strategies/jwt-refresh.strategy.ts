@@ -6,11 +6,11 @@ export class RefreshJwtStrategy extends PassportStrategy(Strategy, 'jwt-refresh'
     super({
       jwtFromRequest: ExtractJwt.fromBodyField('refresh'),
       ignoreExpiration: false,
-      secretOrKey: `${process.env.JWT_SECRET}`,
+      secretOrKey: `${process.env.JWT_REFRESH_SECRET}`,
     });
   }
 
   async validate(payload: any) {
-    return { userId: payload.sub, username: payload.email };
+    return payload;
   }
 }
