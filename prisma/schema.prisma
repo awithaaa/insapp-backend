@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email String @unique
+  password String
+  firstName String?
+  lastName String?
+  role Role? @default(USER)
+
+}
+
+model UserHistroy {
+  id Int @default(autoincrement()) @id
+  userID Int
+  type String
+  detail Json
+}
+
+model Student {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  firstName String
+  lastName String
+  email String?
+  school String
+  address String
+  grade StudentGrade
+  gender Gender
+  dateOfBirth String
+  contactNo String
+  guardianNo String
+  added Int
+
+
+  studentPayment StudentPayment[]
+  studentClass StudentClass[]
+}
+
+model StudentPayment {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  studentID Int
+  classId Int
+  month Month
+  amount Float
+  added Int
+  student Student @relation(fields: [studentID], references: [id])
+}
+
+model Class {
+  id Int @id @default(autoincrement())
+  createAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  subject String
+  teacherID Int
+  grade String
+  day Day
+  startTime String
+  endTime String 
+  type String
+  perPayment Float
+  perTeacher Float
+  perClass Float
+  totalAmount Float
+  added Int
+
+  teacherPayment TeacherPayment[]
+}
+
+model StudentClass {
+  id Int @id @default(autoincrement())
+  createAt DateTime @default(now())
+  classId Int
+  studentId Int
+  added Int
+
+  student Student @relation(fields: [studentId], references: [id])
+}
+
+model Teacher {
+  id Int @id @default(autoincrement())
+  createAt DateTime @default(now())
+  firstName String
+  lastName String
+  email String
+  gender Gender
+  contactNo String
+  dataOfBirth String
+  added Int
+
+  teacherPayment TeacherPayment[]
+}
+
+model TeacherPayment {
+  id Int @id @default(autoincrement())
+  teacherID Int
+  classID Int
+  month Month
+  Year String
+  amount Float
+  added Int
+
+  class Class @relation(fields: [classID], references: [id])
+  teacher Teacher @relation(fields: [teacherID], references: [id])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum StudentGrade {
+  GRADE01
+  GRADE02
+  GRADE03
+  GRADE04
+  GRADE05
+  GRADE06
+  GRADE07
+  GRADE08
+  GRADE09
+  GRADE10
+  GRADE11
+  GRADE12
+  GRADE13
+}
+
+enum Month {
+  January
+  February
+  March
+  April
+  May
+  June
+  July
+  August
+  September
+  October 
+  November
+  December
+}
+
+enum Day {
+  Monday
+  Tuesday
+  Wednesday
+  Thursday
+  Friday
+  Saturday
+  Sunday
+}
+
+enum Gender {
+  Male
+  Female
+}

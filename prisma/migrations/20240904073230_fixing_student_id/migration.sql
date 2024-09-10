@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE `student` MODIFY `id` INTEGER NOT NULL AUTO_INCREMENT;
+
+-- AlterTable
+ALTER TABLE `user` MODIFY `role` ENUM('USER', 'ADMIN') NULL DEFAULT 'USER';
