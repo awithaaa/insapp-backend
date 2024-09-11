@@ -16,6 +16,7 @@ export class StudentService {
 
     return {
       message: 'User Registered Successfully!',
+      student: student,
     };
   }
 
