@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTeacherDto } from './dto/createTeacher.dto';
 
@@ -17,5 +17,28 @@ export class TeacherService {
       message: 'Teacher Registered Successfully!',
       teacher: teacher,
     };
+  }
+
+  async findTeacherById(id: number) {
+    const teacher = await this.prismaService.teacher.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    if (!teacher) throw new NotFoundException('Teacher Not Found!');
+
+    return teacher;
+  }
+
+  async findAllTeachers() {
+    const teachers = await this.prismaService.teacher.findMany({
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        gender: true,
+        contactNo: true,
+      },
+    });
   }
 }

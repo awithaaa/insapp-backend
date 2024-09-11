@@ -26,6 +26,7 @@ export class StudentService {
         id: true,
         firstName: true,
         lastName: true,
+        gender: true,
         grade: true,
       },
     });
