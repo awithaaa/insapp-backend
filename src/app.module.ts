@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { StudentModule } from './public/student/student.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TeacherModule } from './public/teacher/teacher.module';
+import { ClassModule } from './public/class/class.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { TeacherModule } from './public/teacher/teacher.module';
     AuthModule,
     StudentModule,
     TeacherModule,
+    ClassModule,
   ],
 })
 export class AppModule {}
