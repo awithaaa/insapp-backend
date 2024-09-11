@@ -63,8 +63,9 @@ model Class {
   createAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   subject String
+  teacher Teacher @relation(fields: [teacherID], references: [id])
   teacherID Int
-  grade String
+  grade StudentGrade
   day Day
   startTime String
   endTime String 
@@ -72,7 +73,7 @@ model Class {
   perPayment Float
   perTeacher Float
   perClass Float
-  totalAmount Float
+  totalAmount Float?
   added Int
 
   teacherPayment TeacherPayment[]
@@ -100,6 +101,7 @@ model Teacher {
   dateOfBirth String
   added Int
 
+  class Class[]
   teacherPayment TeacherPayment[]
 }
 
