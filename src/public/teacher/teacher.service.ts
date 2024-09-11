@@ -12,5 +12,10 @@ export class TeacherService {
         ...dto,
       },
     });
+
+    return {
+      message: 'Teacher Registered Successfully!',
+      teacher: teacher,
+    };
   }
 }
