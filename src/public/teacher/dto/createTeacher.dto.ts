@@ -18,6 +18,9 @@ export class CreateTeacherDto extends Dto<CreateTeacherDto> {
   @IsString()
   @IsNotEmpty()
   gender: Gender;
+
+  @IsString()
+  @IsNotEmpty()
   contactNo: string;
 
   @IsString()

@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { TeacherService } from './teacher.service';
 import { CreateTeacherDto } from './dto/createTeacher.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
@@ -15,7 +25,7 @@ export class TeacherController {
   }
 
   @Get()
-  async findTeacherById(@Param() tid: number) {
+  async findTeacherById(@Query('tid') tid: number) {
     return await this.teacherService.findTeacherById(tid);
   }
 
