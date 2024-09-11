@@ -7,12 +7,14 @@ import {
   Patch,
   Post,
   Query,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { ClassService } from './class.service';
 import { CreateClassDto } from './dto/createClass.dto';
 import { UpdateClassDto } from './dto/updateClass.dto';
+import { UpdateStuClsDto } from './dto/updateStudentClass.dto';
 
 @Controller('class')
 @UseGuards(JwtAuthGuard)
@@ -42,5 +44,31 @@ export class ClassController {
   @Delete(':id')
   async deleteClassById(@Param('id') id: number) {
     return await this.classService.deleteClassById(id);
+  }
+
+  // Add Students into classes
+  @Post('student')
+  async addStudentClass(@Query('sid') sid: number, @Query('cid') cid: number, @Req() req) {
+    return await this.classService.addStudentClass(sid, cid, req.user.userId.id);
+  }
+
+  @Get('student/:id')
+  async findStudentClassById(@Param('id') id: number) {
+    return await this.classService.findStudentClassById(id);
+  }
+
+  @Get('student')
+  async findStudentClassBySid(@Query('sid') id: number) {
+    return await this.classService.findStudentClassBySid(id);
+  }
+
+  @Patch('student/:id')
+  async editStudentClassById(@Param('id') id: number, @Body() dto: UpdateStuClsDto) {
+    return await this.classService.editStudentClassById(id, dto);
+  }
+
+  @Delete('student/:id')
+  async deleteStudentClassById(@Param('id') id: number) {
+    return await this.classService.deleteStudentClassById(id);
   }
 }
