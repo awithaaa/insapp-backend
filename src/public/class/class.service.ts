@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateClassDto } from './dto/createClass.dto';
+import { UpdateClassDto } from './dto/updateClass.dto';
 
 @Injectable()
 export class ClassService {
@@ -35,7 +36,7 @@ export class ClassService {
     return cls;
   }
 
-  async editClassById(id: number, dto) {
+  async editClassById(id: number, dto: UpdateClassDto) {
     const cls = await this.prismaService.class.findUnique({
       where: { id: id },
     });

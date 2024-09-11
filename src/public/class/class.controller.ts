@@ -12,6 +12,7 @@ import {
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { ClassService } from './class.service';
 import { CreateClassDto } from './dto/createClass.dto';
+import { UpdateClassDto } from './dto/updateClass.dto';
 
 @Controller('class')
 @UseGuards(JwtAuthGuard)
@@ -34,7 +35,7 @@ export class ClassController {
   }
 
   @Patch(':id')
-  async editClassById(@Param('id') id: number, dto) {
+  async editClassById(@Param('id') id: number, dto: UpdateClassDto) {
     return await this.classService.editClassById(id, dto);
   }
 
