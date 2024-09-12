@@ -110,7 +110,7 @@ model TeacherPayment {
   teacherID Int
   classID Int
   month Month
-  Year String
+  year String
   amount Float
   added Int
 

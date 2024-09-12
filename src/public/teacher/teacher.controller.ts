@@ -13,6 +13,8 @@ import { TeacherService } from './teacher.service';
 import { CreateTeacherDto } from './dto/createTeacher.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { TeacherEditDto } from './dto/editTeacher.dto';
+import { AddTeacherPaymentDto } from './dto/addTeacherPayment.dto';
+import { EditTeacherPaymentDto } from './dto/editTeacherPayment.dto';
 
 @Controller('teacher')
 @UseGuards(JwtAuthGuard)
@@ -42,5 +44,31 @@ export class TeacherController {
   @Delete(':id')
   async deleteTeacherById(@Param('id') id: number) {
     return await this.teacherService.deleteTeacherById(id);
+  }
+
+  // Teacher Payments
+  @Post('payment')
+  async addTeacherPayment(@Body() dto: AddTeacherPaymentDto) {
+    return await this.teacherService.addTeacherPayment(dto);
+  }
+
+  @Get('payment/:id')
+  async findTeacherPaymentById(@Param('id') id: number) {
+    return await this.teacherService.findTeacherPaymentById(id);
+  }
+
+  @Get('payment')
+  async findAllTeacherPaymentById(@Query('id') id: number) {
+    return await this.teacherService.findAllTeacherPaymentById(id);
+  }
+
+  @Patch('payment/:id')
+  async editTeacherPaymentById(@Param('id') id: number, @Body() dto: EditTeacherPaymentDto) {
+    return await this.teacherService.editTeacherPaymentById(id, dto);
+  }
+
+  @Delete('payment/:id')
+  async deleteTeacherPaymentById(@Param('id') id: number) {
+    return await this.teacherService.deleteTeacherPaymentById(id);
   }
 }
