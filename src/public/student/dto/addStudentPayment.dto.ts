@@ -2,14 +2,14 @@ import { Month } from '@prisma/client';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { Dto } from 'src/lib/dto/Dto';
 
-export class AddTeacherPaymentDto extends Dto<AddTeacherPaymentDto> {
+export class AddStudentPaymentDto extends Dto<AddStudentPaymentDto> {
   @IsNumber()
   @IsNotEmpty()
-  teacherID: number;
+  studentID: number;
 
   @IsNumber()
   @IsNotEmpty()
-  classID: number;
+  classId: number;
 
   @IsString()
   @IsNotEmpty()
