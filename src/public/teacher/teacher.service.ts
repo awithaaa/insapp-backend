@@ -101,6 +101,11 @@ export class TeacherService {
     });
     if (!cls) throw new NotFoundException('Class Not Found.');
 
+    const updateCls = await this.prismaService.class.update({
+      where: { id: dto.classID },
+      data: { totalAmount: cls.totalAmount - dto.amount },
+    });
+
     const payment = await this.prismaService.teacherPayment.create({
       data: { ...dto },
     });
