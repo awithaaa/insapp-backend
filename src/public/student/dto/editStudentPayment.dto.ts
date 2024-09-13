@@ -9,7 +9,7 @@ export class EditStudentPaymentDto extends Dto<EditStudentPaymentDto> {
 
   @IsNumber()
   @IsOptional()
-  classId: number;
+  classID: number;
 
   @IsString()
   @IsOptional()

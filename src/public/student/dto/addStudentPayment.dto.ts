@@ -9,15 +9,11 @@ export class AddStudentPaymentDto extends Dto<AddStudentPaymentDto> {
 
   @IsNumber()
   @IsNotEmpty()
-  classId: number;
+  classID: number;
 
   @IsString()
   @IsNotEmpty()
   month: Month;
-
-  @IsString()
-  @IsNotEmpty()
-  year: string;
 
   @IsNumber()
   @IsNotEmpty()

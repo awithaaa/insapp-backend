@@ -51,7 +51,7 @@ model StudentPayment {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
   studentID Int
-  classId Int
+  classID Int
   month Month
   amount Float
   added Int

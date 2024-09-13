@@ -48,8 +48,12 @@ export class ClassController {
 
   // Add Students into classes
   @Post('student')
-  async addStudentClass(@Query('sid') sid: number, @Query('cid') cid: number, @Req() req) {
-    return await this.classService.addStudentClass(sid, cid, req.user.userId.id);
+  async addStudentClass(@Body() body, @Req() req) {
+    return await this.classService.addStudentClass(
+      body.studentId,
+      body.classId,
+      req.user.userId.id,
+    );
   }
 
   @Get('student/:id')

@@ -57,8 +57,8 @@ export class TeacherController {
     return await this.teacherService.findTeacherPaymentById(id);
   }
 
-  @Get('payment')
-  async findAllTeacherPaymentById(@Query('id') id: number) {
+  @Get('payments/:id')
+  async findAllTeacherPaymentById(@Param('id') id: number) {
     return await this.teacherService.findAllTeacherPaymentById(id);
   }
 

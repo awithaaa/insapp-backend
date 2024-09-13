@@ -98,12 +98,12 @@ export class StudentService {
     if (!student) throw new NotFoundException('Student Not Found.');
 
     const cls = await this.prismaService.class.findUnique({
-      where: { id: dto.classId },
+      where: { id: dto.classID },
     });
     if (!cls) throw new NotFoundException('Class Not Found.');
 
     const updateCls = await this.prismaService.class.update({
-      where: { id: dto.classId },
+      where: { id: dto.classID },
       data: { totalAmount: cls.totalAmount + dto.amount },
     });
 
@@ -127,6 +127,11 @@ export class StudentService {
   }
 
   async findAllStudentPaymentById(id: number) {
+    const student = this.prismaService.student.findUnique({
+      where: { id: id },
+    });
+    if (!student) throw new NotFoundException('Student Not Found.');
+
     const payments = await this.prismaService.studentPayment.findMany({
       where: { studentID: id },
     });

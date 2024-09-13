@@ -97,6 +97,7 @@ export class ClassService {
 
     return {
       message: 'Student added Successfully.',
+      cls: stuCls,
     };
   }
 
