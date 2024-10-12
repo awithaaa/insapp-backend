@@ -11,6 +11,8 @@ import { LoginResDto } from './dto/loginRes.dto';
 import { CreateUserDto } from 'src/public/user/dto/user-create.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
+const EXPIRE_TIME = 20 * 1000;
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -36,14 +38,17 @@ export class AuthService {
 
     return new LoginResDto({
       user: { ...authUser },
-      accessToken: await this.jwtService.signAsync(payload, {
-        expiresIn: '15m',
-        secret: this.configService.getOrThrow('JWT_SECRET'),
-      }),
-      refreshToken: await this.jwtService.signAsync(payload, {
-        expiresIn: '1d',
-        secret: this.configService.getOrThrow('JWT_REFRESH_SECRET'),
-      }),
+      backendTokens: {
+        accessToken: await this.jwtService.signAsync(payload, {
+          expiresIn: '15m',
+          secret: this.configService.getOrThrow('JWT_SECRET'),
+        }),
+        refreshToken: await this.jwtService.signAsync(payload, {
+          expiresIn: '1d',
+          secret: this.configService.getOrThrow('JWT_REFRESH_SECRET'),
+        }),
+        expiresIn: new Date().setTime(new Date().getTime() + EXPIRE_TIME),
+      },
     });
   }
 
