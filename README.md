@@ -13,13 +13,14 @@
   <li>Database: Mysql</li>
 </ul> 
 
-<a href="https://github.com/awithaaa/insapp-frontend">View Frontend Repository Here</a>
 
 <h3>Backend</h3>
 <ul>
   <li>Language: Typescript</li>
   <li>Framework: Next.js</li>
 </ul> 
+<a href="https://github.com/awithaaa/insapp-frontend">View Frontend Repository Here</a>
+
 
 <h2>Credits</h2>
 <p>InsApp is built and maintained solely by Arosha Withanage. Special thanks to the developers of the libraries and frameworks used in this project.</p>
